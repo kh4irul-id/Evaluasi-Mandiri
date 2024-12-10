@@ -1,3 +1,5 @@
+#Misalkan kita memiliki dua jenis produk yang dapat diproduksi, yaitu Produk A dan Produk B, dengan keuntungan dan batasan tertentu.
+
 using JuMP
 using GLPK
 
