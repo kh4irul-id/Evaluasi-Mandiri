@@ -1,0 +1,25 @@
+using JuMP
+using GLPK
+
+# Membuat model optimisasi
+model = Model(GLPK.Optimizer)
+
+# Mendefinisikan variabel keputusan
+@variable(model, x1 >= 0, Int)  # Produk A
+@variable(model, x2 >= 0, Int)  # Produk B
+
+# Menambahkan fungsi tujuan 5x1 + 3x2
+@objective(model, Max, 5 * x1 + 3 * x2)
+
+# Menambahkan kendala
+@constraint(model, 2 * x1 + x2 <= 100) #2x1+x2<=100
+@constraint(model, x1 + 2 * x2 <= 80) #x1+2x2<=80
+
+# Menyelesaikan model
+optimize!(model)
+
+# Menampilkan hasil
+println("Status: ", termination_status(model))
+println("Jumlah Produk A yang diproduksi: ", value(x1))
+println("Jumlah Produk B yang diproduksi: ", value(x2))
+println("Keuntungan maksimum: ", objective_value(model))
